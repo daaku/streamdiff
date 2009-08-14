@@ -1,0 +1,14 @@
+#!/bin/sh
+
+curl http://www.json.org/json2.js > json2.js
+cat \
+  json2.js \
+  mu/md5sum.js \
+  mu/mu.js \
+  delegator/delegator.js \
+  herstory/herstory.js \
+  far/FlashReplace-1.01.js \
+  js/*.js \
+  | java -jar ~/usr/yuicompressor/lib/*.jar --type js > far/min.js
+cat streamdiff.css | java -jar ~/usr/yuicompressor/lib/*.jar --type css > far/min.css
+rm json2.js

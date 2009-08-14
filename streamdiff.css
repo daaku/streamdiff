@@ -1,0 +1,468 @@
+/**
+ * Tags
+ */
+body {
+  background-color: #eceff5;
+  line-height: 1.2;
+  font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+}
+a {
+  color: #3B5998;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+
+/**
+ * Common
+ */
+button,
+.button {
+  background-color: #5c74a3;
+  border: 1px inset #ebebeb;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.3em 2em;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+}
+button:hover,
+.button:hover {
+  border: 1px inset #aaa;
+  background-color: #283856;
+}
+button:active,
+.button:active {
+  border: 1px solid #000;
+  background-color: #9FBAEF;
+  color: #000;
+}
+
+/**
+ * Document
+ */
+#doc {
+  margin: 0 auto;
+  width: 660px;
+}
+
+/**
+ * Header
+ */
+#doc > .hd h1 {
+  color: #3b5998;
+  font-family: Candara;
+  font-size: 2.5em;
+  margin: 0 0 0.25em 0;
+  -webkit-text-stroke: 1px #000;
+}
+#doc > .hd h1 a {
+  text-decoration: none;
+}
+#doc > .hd .logo {
+  position: relative;
+  top: 4px;
+  font-size: 2em;
+  line-height: 0.5;
+}
+#doc > .hd .logo .plus {
+  color: #4e9806;
+}
+#doc > .hd .logo .minus {
+  color: #cc0000;
+}
+#doc > .hd .beta {
+  color: #fff;
+  background-color: #ffdd52;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  padding: 0.25em 0.5em;
+  -webkit-text-stroke: 0px;
+  position: relative;
+  top: -30px;
+  left: -10px;
+}
+
+/**
+ * User Info
+ */
+#doc > .hd #user-info {
+  line-height: 1;
+  float: right;
+  text-align: right;
+  margin-top: 1em;
+}
+#doc > .hd #user-info .pic {
+  margin-left: 0.5em;
+  float: right;
+}
+#doc > .hd #user-info .pic img {
+  height: 32px;
+  width: 32px;
+}
+#doc > .hd #user-info a {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+#doc > .hd #user-info a.logout {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+/**
+ * Body
+ */
+#doc > #bd-container > .bd {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  clear: both;
+}
+
+/**
+ * Footer
+ */
+#doc > .ft {
+  text-align: center;
+  margin-top: 1em;
+  font-size: 0.8em;
+}
+#doc > .ft img {
+  vertical-align: middle;
+}
+
+/**
+ * Spinner
+ */
+#spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+#spinner .underlay,
+#spinner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#spinner .underlay {
+  opacity: 0.6;
+  background-color: #000;
+  height: 52px;
+  width: 72px;
+  margin: -26px -36px;
+}
+#spinner .overlay {
+  background: transparent url(http://static.ak.fbcdn.net/images/loaders/indicator_blue_large.gif) no-repeat scroll 50% 50%;
+  height: 32px;
+  width: 32px;
+  margin: -16px;
+}
+
+/**
+ * Intro
+ */
+#intro {
+  padding: 1em 2.5em;
+  background-color: #fff;
+}
+
+#intro .what {
+  color: #333;
+}
+#intro .buttons {
+  text-align: center;
+}
+#intro button {
+  font-size: 1.1em;
+  width: 280px;
+  margin: 1em;
+}
+
+/**
+ * Stream View
+ */
+#stream {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #fff;
+  padding: 0.75em 1em;
+}
+
+/* Source Info when viewing a Profile page. */
+#stream .source-info {
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+}
+#stream .source-info a:hover {
+  text-decoration: none;
+}
+#stream .source-info img {
+  vertical-align: middle;
+  margin-right: 1em;
+}
+
+#stream > .publisher textarea {
+  color: #666;
+  font-size: 1.2em;
+  height: 1.2em;
+  width: 99%;
+  padding: 4px;
+  overflow: hidden;
+  font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+}
+#stream > .publisher .buttons {
+  display: none;
+  text-align: right;
+  margin-top: 0.25em;
+}
+#stream > .publisher .buttons .button {
+  font-size: 1.1em;
+}
+#stream > .publisher.focused textarea {
+  color: #000;
+}
+#stream > .publisher.focused .buttons {
+  display: block;
+}
+
+#stream > .from-to {
+  text-align: right;
+  font-size: 0.8em;
+  color: #666;
+}
+
+#stream > ul {
+  clear: both;
+  padding: 0;
+  padding-top: 2em;
+  list-style-type: none;
+  margin: 0;
+}
+#stream .post {
+  margin: 0;
+  padding: 0.75em 0;
+  border-bottom: 1px solid #eee;
+  color: #333333;
+}
+#stream .post > .bd {
+  margin-left: 60px;
+}
+#stream .post .actor-pic {
+  float: left;
+}
+#stream .post .actor-pic img {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#stream .post .actor {
+  font-weight: bold;
+}
+#stream .post .message {
+  overflow: hidden;
+}
+#stream .post .attachment {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  overflow: hidden;
+}
+#stream .post .attachment .media {
+  float: left;
+  margin-right: 1em;
+}
+#stream .post .attachment .media img {
+  margin-right: 0.5em;
+  max-height: 200px;
+  max-width: 130px;
+}
+#stream .post .attachment .media.photo img {
+  border: 1px solid #ddd;
+  padding: 0.2em;
+}
+#stream .post .attachment .media.photo img:hover {
+  border: 1px solid #3B5998;
+}
+#stream .post .attachment .name {
+  font-weight: bold;
+}
+#stream .post .attachment .media.photo + .name {
+  display: block;
+  clear: left;
+}
+#stream .post .attachment .media.video a {
+  position: relative;
+}
+#stream .post .attachment .media.video a .play {
+  position: absolute;
+  background: transparent url(http://static.ak.fbcdn.net/images/streams/videos/video_badge.png) no-repeat left bottom;
+  bottom: 0;
+  left: 0;
+  height: 32px;
+  width: 39px;
+}
+#stream .post .attachment .caption {
+  font-size: 0.9em;
+  color: #999;
+  margin: 0.35em 0;
+}
+#stream .post .meta {
+  color: #666;
+  margin-top: 0.5em;
+  margin-bottom: 0.75em;
+  font-size: 0.8em;
+}
+#stream .post .icon {
+  margin-right: 0.5em;
+  vertical-align: top;
+}
+#stream .post .sub {
+  background-color: #ECEFF5;
+  border-bottom: 1px solid #E5EAF1;
+  font-size: 0.8em;
+  padding: 0.5em;
+  margin-bottom: 0.25em;
+}
+#stream .post .comment .from-pic {
+  float: left;
+}
+#stream .post .comment .from-pic img,
+#stream .post .post-comment img {
+  height: 35px;
+  width: 35px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#stream .post .comment .hd {
+  margin-bottom: 0.25em;
+  color: #999999;
+}
+#stream .post .comment .hd a {
+  margin-right: 0.5em;
+}
+#stream .post .comment .bd {
+  margin-left: 44px;
+  overflow: hidden;
+}
+#stream .post .hidden {
+  display: none;
+}
+#stream .post .post-comment img {
+  float: left;
+  display: none;
+}
+#stream .post .post-comment.focused img {
+  display: block;
+}
+#stream .post .post-comment textarea {
+  width: 99%;
+  color: #777;
+  border: 1px solid #BDC7D8;
+  height: 1.5em;
+  padding: 0.2em 0.2em 0.1em 0.3em;
+  font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+#stream .post .post-comment.focused textarea {
+  margin-left: 9px;
+  width: 500px;
+  height: 3em;
+  color: #000;
+}
+#stream .post .post-comment .buttons {
+  display: none;
+  clear: left;
+  margin-left: 44px;
+  margin-top: 0.25em;
+}
+#stream .post .post-comment.focused .buttons {
+  display: block;
+}
+
+
+#stream .craving-content {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 1.1em;
+}
+#stream .no-content {
+  margin: 3em 0;
+  text-align: center;
+}
+#stream .no-content h2 {
+  color: #444;
+}
+#stream .no-content button {
+  font-size: 1em;
+}
+
+
+
+
+
+
+/**
+ * iPhone Specific
+ */
+.iphone body {
+  font-size: 12px;
+  margin: 0;
+}
+.iphone #doc {
+  width: 99%;
+}
+.iphone #doc .hd h1 {
+  margin-top: 0.25em;
+  font-size: 16px;
+}
+.iphone #doc .hd h1 .logo {
+  line-height: 0.4;
+}
+.iphone #doc > .hd #user-info {
+  margin-top: 0;
+}
+.iphone #intro {
+  width: 92%;
+}
+.iphone #intro li > span {
+  font-size: 4em;
+}
+.iphone #intro li button {
+  width: 180px;
+  position: relative;
+  top: -1em;
+}
+.iphone #stream {
+  background-color: #fff;
+}
+.iphone #stream {
+  width: 94%;
+  margin: 0;
+  padding: 10px 10px;
+  float: none;
+}
+.iphone #stream .sidebar {
+  display: none;
+}
+.iphone #stream > .publisher textarea {
+  height: 20px;
+}
+.iphone #stream .post .attachment .media img {
+  max-height: 100px;
+  max-width: 70px;
+}
+.iphone #stream .post .post-comment.focused textarea {
+  width: 180px;
+}

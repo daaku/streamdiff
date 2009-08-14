@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>StreamDiff</title>
+
+    <link type="text/css" rel="stylesheet" href="streamdiff.css">
+    <link id="favicon" rel="shortcut icon" href="/far/favicon.ico">
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <link rel="apple-touch-icon" href="/far/touch.png">
+  </head>
+  <body>
+    <div id="doc">
+      <div class="hd">
+        <div id="user-info"></div>
+
+        <h1>
+          <a href="#/">
+            StreamDiff
+            <span class="logo">
+              <span class="plus">+</span><span class="minus">-</span>
+            </span>
+            <span class="beta">beta</span>
+          </a>
+        </h1>
+      </div>
+
+      <div id="bd-container"></div>
+
+      <div class="ft">
+        <a class="share-streamdiff">Share StreamDiff</a>
+        |
+        <a href="http://www.facebook.com/apps/application.php?id=96228874643&v=wall">
+          Questions, Comments or Requests?
+        </a>
+
+        |
+
+        <a href="http://creativecommons.org/licenses/BSD/">
+          <img src="/far/40bsd.png" alt="BSD">
+        </a>
+      </div>
+    </div>
+
+    <div id="spinner">
+      <div class="underlay"></div>
+      <div class="overlay"></div>
+    </div>
+
+    <script type="text/javascript" src="http://www.json.org/json2.js"></script>
+    <script type="text/javascript" src="far/FlashReplace-1.01.js"></script>
+    <script type="text/javascript" src="mu/md5sum.js"></script>
+    <script type="text/javascript" src="mu/mu.js"></script>
+    <script type="text/javascript" src="delegator/delegator.js"></script>
+    <script type="text/javascript" src="herstory/herstory.js"></script>
+    <script type="text/javascript" src="js/00_base.js"></script>
+    <script type="text/javascript" src="js/01_cookie.js"></script>
+    <script type="text/javascript" src="js/02_storage.js"></script>
+    <script type="text/javascript" src="js/03_dom.js"></script>
+    <script type="text/javascript" src="js/05_spinner.js"></script>
+    <script type="text/javascript" src="js/06_intro.js"></script>
+    <script type="text/javascript" src="js/07_user_info.js"></script>
+    <script type="text/javascript" src="js/08_stream.js"></script>
+    <script type="text/javascript" src="js/09_comments.js"></script>
+    <script type="text/javascript" src="js/10_publisher.js"></script>
+    <script type="text/javascript" src="js/11_detail.js"></script>
+    <script type="text/javascript">
+      StreamDiff.init();
+    </script>
+  </body>
+</html>
