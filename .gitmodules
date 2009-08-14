@@ -1,0 +1,9 @@
+[submodule "herstory"]
+	path = herstory
+	url = git@github.com:nshah/js-herstory.git
+[submodule "delegator"]
+	path = delegator
+	url = git@github.com:nshah/js-delegator.git
+[submodule "mu"]
+	path = mu
+	url = git@github.com:nshah/mu.git
