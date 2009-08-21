@@ -2,18 +2,32 @@ StreamDiff.Publisher = {
   _blurTimer: null,
   _message: null,
 
+  init: function() {
+    if (this._initListeners) {
+      return;
+    }
+    this._initListeners = true;
+
+    Delegator.listen('.publisher #message', 'focus', function() {
+                       StreamDiff.Publisher.focus(this);
+                     });
+    Delegator.listen('.publisher #message', 'blur', function() {
+                       StreamDiff.Publisher.blur(this);
+                     });
+    Delegator.listen('.publisher #message', 'keyup', function() {
+                       StreamDiff.Publisher.autoSize(this);
+                     });
+    Delegator.listen('.publisher #message', 'mouseup', function() {
+                       StreamDiff.Publisher.autoSize(this);
+                     });
+  },
+
   render: function(message) {
+    StreamDiff.Publisher.init();
     StreamDiff.Publisher._message = message;
     return (
       '<form class="publisher" onsubmit="return StreamDiff.Publisher.submit()">' +
-        '<textarea ' +
-          'id="message"' +
-          'onkeyup="StreamDiff.Publisher.autoSize(this)"' +
-          'onmouseup="StreamDiff.Publisher.autoSize(this)"' +
-          'onfocus="StreamDiff.Publisher.focus(this)"' +
-          'onblur="StreamDiff.Publisher.blur(this)">' +
-          message +
-        '</textarea>' +
+        '<textarea id="message">' + message + '</textarea>' +
         '<div class="buttons">' +
           '<input type="submit" class="button" value="share">' +
         '</div>' +
@@ -33,11 +47,14 @@ StreamDiff.Publisher = {
 
   blur: function(textarea) {
     if (!textarea.value) {
-      textarea.value = StreamDiff.Publisher._message;
+      StreamDiff.Publisher._blurTimer = window.setTimeout(
+        function() {
+          StreamDiff.DOM.removeClass(textarea.form, 'focused');
+          textarea.value = StreamDiff.Publisher._message;
+        }
+        ,400
+      );
     }
-    StreamDiff.Publisher._blurTimer = window.setTimeout(function() {
-      StreamDiff.DOM.removeClass(textarea.form, 'focused');
-    }, 400);
   },
 
   autoSize: function(textarea) {
