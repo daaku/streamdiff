@@ -46,7 +46,7 @@ StreamDiff.Stream = {
 
     // register event delegators
     Delegator.listen('#stream .post .action-comment', 'click', function() {
-      StreamDiff.Comments.show(this);
+      Comments.show(this);
     });
     Delegator.listen('#stream .post .action-like', 'click', function() {
       StreamDiff.Stream.like(this);
@@ -71,7 +71,7 @@ StreamDiff.Stream = {
     });
 
     // initialize the Comments logic
-    StreamDiff.Comments.init();
+    Comments.init();
   },
 
   registerUnload: function() {
@@ -567,7 +567,7 @@ StreamDiff.Stream = {
        var style = html === '' ? ' style="display: none;"' : '';
 
        html += (
-         '<form onsubmit="return StreamDiff.Comments.submit(this)" ' +
+         '<form onsubmit="return Comments.submit(this)" ' +
            'class="sub post-comment"' + style + '>' +
            '<img src="' + profiles[Mu.session().uid].pic_square + '">' +
            '<textarea name="text">Write a comment…</textarea>' +

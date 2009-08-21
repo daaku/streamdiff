@@ -1,13 +1,13 @@
 /**
 * Comment action and UI.
 */
-StreamDiff.Comments = {
+var Comments = {
   init: function() {
     Delegator.listen('.post-comment textarea', 'focus', function() {
-                       StreamDiff.Comments.focus(this);
+                       Comments.focus(this);
                      });
     Delegator.listen('.post-comment textarea', 'blur', function() {
-                       StreamDiff.Comments.blur(this);
+                       Comments.blur(this);
                      });
   },
 
