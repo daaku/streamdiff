@@ -32,7 +32,7 @@ var StreamDiff = {
     Delegator.listen('#doc .logout', 'click', function() {
       Mu.logout(function() {
         CookieAuth.clear();
-        StreamDiff.Intro.view();
+        Intro.view();
       });
     });
 
@@ -200,7 +200,7 @@ var StreamDiff = {
         if (response.error_code != 612) {
           CookieAuth.clear();
         }
-        StreamDiff.Intro.view();
+        Intro.view();
         return;
       } else if (Mu.session()) {
         // good time to store a cookie

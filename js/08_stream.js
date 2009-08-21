@@ -95,7 +95,7 @@ StreamDiff.Stream = {
     StreamDiff.Stream._options = options;
 
     if (!Mu.session()) {
-      StreamDiff.Intro.view();
+      Intro.view();
       return;
     }
 

@@ -1,7 +1,7 @@
 /**
  * Intro View - handles login and permissioning.
  */
-StreamDiff.Intro = {
+var Intro = {
   view: function() {
     if (Mu.session()) {
       StreamDiff.fql({
@@ -24,9 +24,9 @@ StreamDiff.Intro = {
           'WHERE ' +
             'uid=' + Mu.session().uid
         )
-      }, StreamDiff.Intro.render);
+      }, Intro.render);
     } else {
-      StreamDiff.Intro.render();
+      Intro.render();
     }
   },
 
@@ -59,7 +59,7 @@ StreamDiff.Intro = {
         '</div>' +
 
         '<div class="buttons">' +
-          '<button class="connect" onclick="StreamDiff.Intro.connect()">'+
+          '<button class="connect" onclick="Intro.connect()">'+
             'Connect with Facebook' +
           '</button>' +
         '</div>' +
