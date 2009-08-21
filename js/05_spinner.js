@@ -1,4 +1,4 @@
-StreamDiff.Spinner = {
+var Spinner = {
   /**
    * Show the spinner.
    */

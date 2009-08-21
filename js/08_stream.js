@@ -135,7 +135,7 @@ StreamDiff.Stream = {
     if (cached) {
       StreamDiff.setMainView(cached);
     } else {
-      StreamDiff.Spinner.show();
+      Spinner.show();
     }
 
     // the profiles we will potentially need based on the stream view we will
@@ -762,7 +762,7 @@ StreamDiff.Stream = {
 
   refresh: function() {
     StreamDiff.Stream.view();
-    StreamDiff.Spinner.show();
+    Spinner.show();
     window.scrollTo(0, 0);
   },
 

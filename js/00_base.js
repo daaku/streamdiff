@@ -131,7 +131,7 @@ var StreamDiff = {
    */
   setMainView: function(html) {
     document.getElementById('bd-container').innerHTML = html;
-    StreamDiff.Spinner.hide();
+    Spinner.hide();
   },
 
  /**
