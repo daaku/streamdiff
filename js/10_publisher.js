@@ -1,32 +1,32 @@
-StreamDiff.Publisher = {
+var Publisher = {
   _blurTimer: null,
   _message: null,
 
   init: function() {
-    if (this._initListeners) {
+    if (Publisher._initListeners) {
       return;
     }
-    this._initListeners = true;
+    Publisher._initListeners = true;
 
     Delegator.listen('.publisher #message', 'focus', function() {
-                       StreamDiff.Publisher.focus(this);
+                       Publisher.focus(this);
                      });
     Delegator.listen('.publisher #message', 'blur', function() {
-                       StreamDiff.Publisher.blur(this);
+                       Publisher.blur(this);
                      });
     Delegator.listen('.publisher #message', 'keyup', function() {
-                       StreamDiff.Publisher.autoSize(this);
+                       Publisher.autoSize(this);
                      });
     Delegator.listen('.publisher #message', 'mouseup', function() {
-                       StreamDiff.Publisher.autoSize(this);
+                       Publisher.autoSize(this);
                      });
   },
 
   render: function(message) {
-    StreamDiff.Publisher.init();
-    StreamDiff.Publisher._message = message;
+    Publisher.init();
+    Publisher._message = message;
     return (
-      '<form class="publisher" onsubmit="return StreamDiff.Publisher.submit()">' +
+      '<form class="publisher" onsubmit="return Publisher.submit()">' +
         '<textarea id="message">' + message + '</textarea>' +
         '<div class="buttons">' +
           '<input type="submit" class="button" value="share">' +
@@ -36,10 +36,10 @@ StreamDiff.Publisher = {
   },
 
   focus: function(textarea) {
-    if (StreamDiff.Publisher._blurTimer) {
-      window.clearTimeout(StreamDiff.Publisher._blurTimer);
+    if (Publisher._blurTimer) {
+      window.clearTimeout(Publisher._blurTimer);
     }
-    if (textarea.value == StreamDiff.Publisher._message) {
+    if (textarea.value == Publisher._message) {
       textarea.value = '';
     }
     StreamDiff.DOM.addClass(textarea.form, 'focused');
@@ -47,10 +47,10 @@ StreamDiff.Publisher = {
 
   blur: function(textarea) {
     if (!textarea.value) {
-      StreamDiff.Publisher._blurTimer = window.setTimeout(
+      Publisher._blurTimer = window.setTimeout(
         function() {
           StreamDiff.DOM.removeClass(textarea.form, 'focused');
-          textarea.value = StreamDiff.Publisher._message;
+          textarea.value = Publisher._message;
         }
         ,400
       );

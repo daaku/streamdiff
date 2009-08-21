@@ -267,7 +267,7 @@ StreamDiff.Stream = {
     var html = (
       '<div id="stream" class="bd">' +
         sourceHtml +
-        StreamDiff.Publisher.render(message) +
+        Publisher.render(message) +
         StreamDiff.Stream.renderFromTo(stream, options) +
         mainStream +
       '</div>'
