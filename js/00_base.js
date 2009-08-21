@@ -36,30 +36,7 @@ StreamDiff = {
       });
     });
 
-    Delegator.listen('.share-streamdiff', 'click', function() {
-      Mu.publish(
-        'Checkout StreamDiff!',
-        {
-          name: 'StreamDiff',
-          caption: 'Just see what\'s new!',
-          description: (
-            'StreamDiff provides an alternate view of your News Feed. ' +
-            'It provides a Mark as read feature to bury the old stuff. ' +
-            'New Posts, Comments and Like\'s will show ' +
-            'up at the top for immediate consumption!'
-          ),
-          href: 'http://streamdiff.com/',
-          media: [
-            {
-              type: 'image',
-              src: 'http://streamdiff.com/logo.png',
-              href: 'http://streamdiff.com/'
-            }
-          ]
-        },
-        [ { text: 'StreamDiff', href: 'http://streamdiff.com/' } ]
-      );
-    });
+    Delegator.listen('.share-streamdiff', 'click', StreamDiff.shareSite);
 
     // finally, use the cookied status or try to get a fresh status from
     // login_status to initialize the application
@@ -70,6 +47,35 @@ StreamDiff = {
         StreamDiff.statusReady();
       });
     }
+  },
+
+  /**
+   * Share the Site using a Publish Popup.
+   */
+  shareSite: function() {
+    var post = {
+      message: 'Checkout StreamDiff!',
+      attachment: {
+        name: 'StreamDiff',
+        caption: 'Just see what\'s new!',
+        description: (
+          'StreamDiff provides an alternate view of your News Feed. ' +
+            'It provides a Mark as read feature to bury the old stuff. ' +
+            'New Posts, Comments and Like\'s will show ' +
+            'up at the top for immediate consumption!'
+        ),
+        href: 'http://streamdiff.com/',
+        media: [
+          {
+            type: 'image',
+            src: 'http://streamdiff.com/logo.png',
+            href: 'http://streamdiff.com/'
+          }
+        ]
+      },
+      action_links: [ { text: 'StreamDiff', href: 'http://streamdiff.com/' } ]
+    };
+    Mu.publish(post);
   },
 
   /**
