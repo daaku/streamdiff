@@ -64,6 +64,11 @@ StreamDiff.Detail = {
     // init must happen after we have a confirmed session
     StreamDiff.Stream.init();
 
+    // update the cached profiles
+    StreamDiff.Stream.updateProfiles(response.profiles);
+
+    // we only expect one post back
+    //TODO handle not found case
     var details = response.details[0];
     details.comments.comment_list = response.comments;
 
