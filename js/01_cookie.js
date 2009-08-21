@@ -52,7 +52,7 @@ var CookieAuth = {
     Mu._session = null;
     StreamDiff.UserInfo.render();
     //this seems too aggressive
-    //StreamDiff.Storage.clear();
+    //Cache.clear();
     //StreamDiff.Stream._read = {};
     document.cookie = (
       CookieAuth.NAME + '=' +

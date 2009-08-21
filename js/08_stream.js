@@ -35,10 +35,10 @@ StreamDiff.Stream = {
     this._initListeners = true;
 
     // try to load a saved set of post_ids marked as read
-    this._read = StreamDiff.Storage.get('markAsRead') || {};
+    this._read = Cache.get('markAsRead') || {};
 
     // try to load a saved set of preferences
-    this._prefs = StreamDiff.Storage.get('prefs') || {};
+    this._prefs = Cache.get('prefs') || {};
     StreamDiff.copy(this._prefs, StreamDiff.Stream.defaultPrefs);
 
     // register the unload handler
@@ -80,8 +80,8 @@ StreamDiff.Stream = {
       if (existing) {
         existing();
       }
-      StreamDiff.Storage.put('markAsRead', StreamDiff.Stream._read);
-      StreamDiff.Storage.put('prefs', StreamDiff.Stream._prefs);
+      Cache.put('markAsRead', StreamDiff.Stream._read);
+      Cache.put('prefs', StreamDiff.Stream._prefs);
     };
   },
 
@@ -131,7 +131,7 @@ StreamDiff.Stream = {
 
     // check for cache view for the corrent conditions and render it, or show
     // a spinner
-    var cached = StreamDiff.Storage.get(StreamDiff.Stream.cacheKey());
+    var cached = Cache.get(StreamDiff.Stream.cacheKey());
     if (cached) {
       StreamDiff.setMainView(cached);
     } else {
@@ -277,9 +277,9 @@ StreamDiff.Stream = {
     // otherwise clear the existing cache entry (if any)
     var cacheKey = StreamDiff.Stream.cacheKey(options);
     if (streamItems.length > 0) {
-      StreamDiff.Storage.put(cacheKey, html, 3600);
+      Cache.put(cacheKey, html, 3600);
     } else {
-      StreamDiff.Storage.remove(cacheKey);
+      Cache.remove(cacheKey);
     }
 
     // make sure this isnt a response for a stale request. the user may have
@@ -657,7 +657,7 @@ StreamDiff.Stream = {
 
     function response() {
       // clear the cache since we do an unintelligent UI update
-      StreamDiff.Storage.remove(StreamDiff.Stream.cacheKey());
+      Cache.remove(StreamDiff.Stream.cacheKey());
       var post = StreamDiff.Stream._posts[post_id];
       post.likes.user_likes = true;
       if (post.likes.count) {

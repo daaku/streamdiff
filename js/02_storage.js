@@ -1,7 +1,7 @@
 /**
 * Client side cache.
 */
-StreamDiff.Storage = {
+var Cache = {
   put: function(key, value, expires) {
     key   = Mu.session().uid + key;
     value = JSON.stringify({
@@ -29,17 +29,18 @@ StreamDiff.Storage = {
       try {
         value = JSON.parse(value.toString());
       } catch(e) {
-        this.remove(key);
-        return;
+        Cache.remove(key);
+        return null;
       }
 
       if (value.expires && new Date(value.expires) < new Date()) {
-        this.remove(key);
-        return;
+        Cache.remove(key);
+        return null;
       } else {
         return value.value;
       }
     }
+    return null;
   },
 
   remove: function(key) {

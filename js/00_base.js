@@ -1,4 +1,4 @@
-StreamDiff = {
+var StreamDiff = {
   /**
    * Start your engines.
    */

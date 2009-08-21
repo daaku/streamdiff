@@ -67,7 +67,7 @@ var Publisher = {
 
     function response(post_id) {
       // clear the cache since we do an unintelligent UI update
-      StreamDiff.Storage.remove(StreamDiff.Stream.cacheKey());
+      Cache.remove(StreamDiff.Stream.cacheKey());
 
       var post = StreamDiff.Stream._posts[post_id] = {
         post_id      : post_id,

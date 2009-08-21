@@ -15,11 +15,11 @@ StreamDiff.UserInfo = {
         '<br>' +
         '<a class="logout">Logout</a>'
       );
-      StreamDiff.Storage.put('userInfo', html);
+      Cache.put('userInfo', html);
     } else {
       // if there's no user given (and we know there's a Session), we try to
       // load from cache anyways
-      html = StreamDiff.Storage.get('userInfo');
+      html = Cache.get('userInfo');
       if (!html) {
         return;
       }
