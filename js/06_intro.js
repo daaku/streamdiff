@@ -33,7 +33,7 @@ var Intro = {
   render: function(results) {
     if (results) {
       var user = results.user[0];
-      StreamDiff.UserInfo.render(user);
+      UserInfo.render(user);
 
       // check if necessary permissions have already been granted
       if (results.perms[0].publish_stream && results.perms[0].read_stream) {

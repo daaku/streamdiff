@@ -100,7 +100,7 @@ StreamDiff.Stream = {
     }
 
     // eager show userInfo
-    StreamDiff.UserInfo.render();
+    UserInfo.render();
 
     // the stream view
     var stream = (
@@ -200,7 +200,7 @@ StreamDiff.Stream = {
       l;
 
     // refresh the user info box
-    StreamDiff.UserInfo.render(profiles[Mu.session().uid]);
+    UserInfo.render(profiles[Mu.session().uid]);
 
     // render all the posts
     var streamItems = [];

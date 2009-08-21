@@ -50,7 +50,7 @@ var CookieAuth = {
   clear: function() {
     // also reset to Mu state to match
     Mu._session = null;
-    StreamDiff.UserInfo.render();
+    UserInfo.render();
     //this seems too aggressive
     //Cache.clear();
     //StreamDiff.Stream._read = {};

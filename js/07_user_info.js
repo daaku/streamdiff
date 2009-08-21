@@ -1,4 +1,4 @@
-StreamDiff.UserInfo = {
+var UserInfo = {
   render: function(user) {
     var html;
 
