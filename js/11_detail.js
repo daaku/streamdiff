@@ -1,4 +1,4 @@
-StreamDiff.Detail = {
+Detail = {
   LIMIT: 20,
 
   view: function(id, commentsOffset) {
@@ -30,7 +30,7 @@ StreamDiff.Detail = {
         'comment ' +
       'WHERE ' +
         'post_id="' + id + '"' +
-      ' LIMIT ' + StreamDiff.Detail.LIMIT +
+      ' LIMIT ' + Detail.LIMIT +
       ' OFFSET ' + commentsOffset
     );
 
@@ -57,7 +57,7 @@ StreamDiff.Detail = {
       details  : details,
       comments : comments,
       profiles : profiles
-    }, StreamDiff.Detail.render);
+    }, Detail.render);
   },
 
   render: function(response) {

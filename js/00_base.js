@@ -119,7 +119,7 @@ var StreamDiff = {
         rest    = hash.substr(9).split('/', 2),
         post_id = rest[0],
         offset  = rest[1] || 0;
-      StreamDiff.Detail.view(post_id, offset);
+      Detail.view(post_id, offset);
     } else {
       //console.log('no match for hash: ' + hash);
       Herstory.load('/');
