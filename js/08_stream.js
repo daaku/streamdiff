@@ -69,6 +69,9 @@ StreamDiff.Stream = {
     Delegator.listen('#stream .show-older', 'click', function(ev) {
       StreamDiff.Stream.showOlder();
     });
+
+    // initialize the Comments logic
+    StreamDiff.Comments.init();
   },
 
   registerUnload: function() {
@@ -567,10 +570,7 @@ StreamDiff.Stream = {
          '<form onsubmit="return StreamDiff.Comments.submit(this)" ' +
            'class="sub post-comment"' + style + '>' +
            '<img src="' + profiles[Mu.session().uid].pic_square + '">' +
-           '<textarea ' +
-             'onfocus="StreamDiff.Comments.focus(this)" ' +
-             'onblur="StreamDiff.Comments.blur(this)" ' +
-             'name="text">Write a comment…</textarea>' +
+           '<textarea name="text">Write a comment…</textarea>' +
            '<div class="buttons">' +
              '<input type="submit" class="button" value="Comment">' +
            '</div>' +

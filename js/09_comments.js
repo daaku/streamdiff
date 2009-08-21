@@ -2,6 +2,15 @@
 * Comment action and UI.
 */
 StreamDiff.Comments = {
+  init: function() {
+    Delegator.listen('.post-comment textarea', 'focus', function() {
+                       StreamDiff.Comments.focus(this);
+                     });
+    Delegator.listen('.post-comment textarea', 'blur', function() {
+                       StreamDiff.Comments.blur(this);
+                     });
+  },
+
   show: function(el) {
     var
       post = StreamDiff.Stream.findPost(el),
@@ -54,11 +63,14 @@ StreamDiff.Comments = {
   },
 
   blur: function(el) {
-    window.setTimeout(function() {
-      StreamDiff.DOM.removeClass(el.form, 'focused');
-    }, 400);
     if (el.value === '') {
-      el.value = 'Write a comment…';
+      window.setTimeout(
+        function() {
+          StreamDiff.DOM.removeClass(el.form, 'focused');
+          el.value = 'Write a comment…';
+        },
+        400
+      );
     }
   }
 };
