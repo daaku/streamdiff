@@ -62,10 +62,10 @@ StreamDiff.Detail = {
 
   render: function(response) {
     // init must happen after we have a confirmed session
-    StreamDiff.Stream.init();
+    Stream.init();
 
     // update the cached profiles
-    StreamDiff.Stream.updateProfiles(response.profiles);
+    Stream.updateProfiles(response.profiles);
 
     // we only expect one post back
     //TODO handle not found case
@@ -75,7 +75,7 @@ StreamDiff.Detail = {
     StreamDiff.setMainView(
       '<div id="stream" class="bd">' +
         '<ul id="posts">' +
-          StreamDiff.Stream.renderPost(details, {}) +
+          Stream.renderPost(details, {}) +
         '</ul>' +
       '</div>'
     );

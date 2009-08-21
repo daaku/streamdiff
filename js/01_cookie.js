@@ -53,7 +53,7 @@ var CookieAuth = {
     UserInfo.render();
     //this seems too aggressive
     //Cache.clear();
-    //StreamDiff.Stream._read = {};
+    //Stream._read = {};
     document.cookie = (
       CookieAuth.NAME + '=' +
         '; expires=' + new Date(0).toGMTString() +

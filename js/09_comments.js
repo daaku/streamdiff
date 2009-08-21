@@ -13,7 +13,7 @@ var Comments = {
 
   show: function(el) {
     var
-      post = StreamDiff.Stream.findPost(el),
+      post = Stream.findPost(el),
       form = StreamDiff.DOM.getElementsByClassName(post, 'post-comment')[0];
     form.style.display = 'block';
     form.text.focus();
@@ -21,14 +21,14 @@ var Comments = {
 
   submit: function(form) {
     var
-      post_id = StreamDiff.Stream.findPostId(form),
+      post_id = Stream.findPostId(form),
       text = form.text.value;
 
     function response(comment_id) {
       // clear the cache since we do an unintelligent UI update
-      Cache.remove(StreamDiff.Stream.cacheKey());
+      Cache.remove(Stream.cacheKey());
 
-      var post = StreamDiff.Stream._posts[post_id];
+      var post = Stream._posts[post_id];
       if (post.comments.count) {
         post.comments.count++;
       } else {
@@ -44,7 +44,7 @@ var Comments = {
         time: (new Date().getTime() / 1000),
         text: text
       });
-      StreamDiff.Stream.refreshPost(post_id);
+      Stream.refreshPost(post_id);
     }
 
     Mu.api({

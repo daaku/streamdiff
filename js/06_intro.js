@@ -37,7 +37,7 @@ var Intro = {
 
       // check if necessary permissions have already been granted
       if (results.perms[0].publish_stream && results.perms[0].read_stream) {
-        StreamDiff.Stream.view();
+        Stream.view();
         return;
       }
     }
@@ -72,7 +72,7 @@ var Intro = {
    */
   connect: function() {
     Mu.login(function(session) {
-      StreamDiff.Stream.view();
+      Stream.view();
     }, 'read_stream,publish_stream');
   }
 };

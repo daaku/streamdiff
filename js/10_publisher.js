@@ -62,14 +62,14 @@ var Publisher = {
 
   submit: function() {
     var
-      target_id = StreamDiff.Stream._options.source_id || undefined,
+      target_id = Stream._options.source_id || undefined,
       message   = document.getElementById('message').value;
 
     function response(post_id) {
       // clear the cache since we do an unintelligent UI update
-      Cache.remove(StreamDiff.Stream.cacheKey());
+      Cache.remove(Stream.cacheKey());
 
-      var post = StreamDiff.Stream._posts[post_id] = {
+      var post = Stream._posts[post_id] = {
         post_id      : post_id,
         actor_id     : Mu.session().uid,
         target_id    : target_id,
@@ -97,9 +97,9 @@ var Publisher = {
         posts = document.getElementById('posts'),
         ul    = document.createElement('ul');
 
-      ul.innerHTML = StreamDiff.Stream.renderPost(
+      ul.innerHTML = Stream.renderPost(
         post,
-        StreamDiff.Stream._options
+        Stream._options
       );
 
       posts.insertBefore(ul.firstChild, posts.firstChild);

@@ -1,7 +1,7 @@
 /**
  * The Stream view.
  */
-StreamDiff.Stream = {
+var Stream = {
   // the current stream view options
   _options: null,
   defaultOptions: {
@@ -39,7 +39,7 @@ StreamDiff.Stream = {
 
     // try to load a saved set of preferences
     this._prefs = Cache.get('prefs') || {};
-    StreamDiff.copy(this._prefs, StreamDiff.Stream.defaultPrefs);
+    StreamDiff.copy(this._prefs, Stream.defaultPrefs);
 
     // register the unload handler
     this.registerUnload();
@@ -49,25 +49,25 @@ StreamDiff.Stream = {
       Comments.show(this);
     });
     Delegator.listen('#stream .post .action-like', 'click', function() {
-      StreamDiff.Stream.like(this);
+      Stream.like(this);
     });
     Delegator.listen('#stream .post .video a', 'click', function(ev) {
-      StreamDiff.Stream.playVideo(this, ev);
+      Stream.playVideo(this, ev);
     });
     Delegator.listen('#stream .post .music a', 'click', function(ev) {
-      StreamDiff.Stream.playMusic(this, ev);
+      Stream.playMusic(this, ev);
     });
     Delegator.listen('#stream .mark-as-read', 'click', function(ev) {
-      StreamDiff.Stream.markAsRead();
+      Stream.markAsRead();
     });
     Delegator.listen('#stream .show-read', 'click', function(ev) {
-      StreamDiff.Stream.showRead();
+      Stream.showRead();
     });
     Delegator.listen('#stream .hide-read', 'click', function(ev) {
-      StreamDiff.Stream.hideRead();
+      Stream.hideRead();
     });
     Delegator.listen('#stream .show-older', 'click', function(ev) {
-      StreamDiff.Stream.showOlder();
+      Stream.showOlder();
     });
 
     // initialize the Comments logic
@@ -80,8 +80,8 @@ StreamDiff.Stream = {
       if (existing) {
         existing();
       }
-      Cache.put('markAsRead', StreamDiff.Stream._read);
-      Cache.put('prefs', StreamDiff.Stream._prefs);
+      Cache.put('markAsRead', Stream._read);
+      Cache.put('prefs', Stream._prefs);
     };
   },
 
@@ -90,9 +90,9 @@ StreamDiff.Stream = {
    */
   view: function(options) {
     // options
-    options = options || StreamDiff.Stream._options;
-    StreamDiff.copy(options, StreamDiff.Stream.defaultOptions);
-    StreamDiff.Stream._options = options;
+    options = options || Stream._options;
+    StreamDiff.copy(options, Stream.defaultOptions);
+    Stream._options = options;
 
     if (!Mu.session()) {
       Intro.view();
@@ -131,7 +131,7 @@ StreamDiff.Stream = {
 
     // check for cache view for the corrent conditions and render it, or show
     // a spinner
-    var cached = Cache.get(StreamDiff.Stream.cacheKey());
+    var cached = Cache.get(Stream.cacheKey());
     if (cached) {
       StreamDiff.setMainView(cached);
     } else {
@@ -164,12 +164,12 @@ StreamDiff.Stream = {
       profiles : profiles
     };
     StreamDiff.fql(queries, function(response) {
-      StreamDiff.Stream.render(response, options);
+      Stream.render(response, options);
     });
   },
 
   updateProfiles: function(profiles_list) {
-    var profiles = StreamDiff.Stream._profiles;
+    var profiles = Stream._profiles;
 
     // do a pass and index profiles by id
     for (i=0, l=profiles_list.length; i<l; i++) {
@@ -189,12 +189,12 @@ StreamDiff.Stream = {
    */
   render: function(response, options) {
     // init must happen after we have a confirmed session
-    StreamDiff.Stream.init();
+    Stream.init();
 
     var
       stream   = response.stream,
-      profiles = StreamDiff.Stream.updateProfiles(response.profiles),
-      read     = StreamDiff.Stream._read,
+      profiles = Stream.updateProfiles(response.profiles),
+      read     = Stream._read,
       posts    = {},
       i,
       l;
@@ -206,13 +206,13 @@ StreamDiff.Stream = {
     var streamItems = [];
     for (i=0, l=stream.length; i<l; i++) {
       var post = stream[i];
-      if (!StreamDiff.Stream._prefs.show_read &&
+      if (!Stream._prefs.show_read &&
           post.post_id in read &&
           read[post.post_id] == post.updated_time) {
         continue;
       }
       posts[post.post_id] = post;
-      streamItems.push(StreamDiff.Stream.renderPost(post, options));
+      streamItems.push(Stream.renderPost(post, options));
     }
 
     var
@@ -242,9 +242,9 @@ StreamDiff.Stream = {
     // different view
     var mainStream;
     if (streamItems.length === 0) {
-      mainStream = StreamDiff.Stream.renderCraving(posts, options);
+      mainStream = Stream.renderCraving(posts, options);
     } else {
-      var toReadOrNotToRead = StreamDiff.Stream._prefs.show_read
+      var toReadOrNotToRead = Stream._prefs.show_read
         ? '<button class="hide-read">Hide read posts</button>'
         : '<button class="show-read">View read posts</button>';
 
@@ -268,14 +268,14 @@ StreamDiff.Stream = {
       '<div id="stream" class="bd">' +
         sourceHtml +
         Publisher.render(message) +
-        StreamDiff.Stream.renderFromTo(stream, options) +
+        Stream.renderFromTo(stream, options) +
         mainStream +
       '</div>'
     );
 
     // cache for 1 hour if we had posts to display
     // otherwise clear the existing cache entry (if any)
-    var cacheKey = StreamDiff.Stream.cacheKey(options);
+    var cacheKey = Stream.cacheKey(options);
     if (streamItems.length > 0) {
       Cache.put(cacheKey, html, 3600);
     } else {
@@ -284,9 +284,9 @@ StreamDiff.Stream = {
 
     // make sure this isnt a response for a stale request. the user may have
     // clicked on something else by the time this response came in.
-    if (JSON.stringify(StreamDiff.Stream._options) ==
+    if (JSON.stringify(Stream._options) ==
           JSON.stringify(options)) {
-      StreamDiff.Stream._posts = posts;
+      Stream._posts = posts;
       StreamDiff.setMainView(html);
     }
   },
@@ -296,7 +296,7 @@ StreamDiff.Stream = {
    */
   renderPost: function(post, options) {
     var
-      S     = StreamDiff.Stream,
+      S     = Stream,
       actor = S._profiles[post.actor_id];
 
     return (
@@ -325,7 +325,7 @@ StreamDiff.Stream = {
    */
   renderMessage: function(post, options) {
     var
-      profiles = StreamDiff.Stream._profiles,
+      profiles = Stream._profiles,
       actor    = profiles[post.actor_id],
       target   = '';
 
@@ -443,7 +443,7 @@ StreamDiff.Stream = {
     }
 
     var
-      profiles = StreamDiff.Stream._profiles,
+      profiles = Stream._profiles,
       likers   = [],
       likes    = post.likes,
       count    = post.likes.count,
@@ -522,7 +522,7 @@ StreamDiff.Stream = {
    */
   renderComments: function(post, options) {
     var
-      profiles = StreamDiff.Stream._profiles,
+      profiles = Stream._profiles,
       html = '',
       i,
       l;
@@ -584,8 +584,8 @@ StreamDiff.Stream = {
   renderCraving: function(posts, options) {
     var source;
     if (options.source_id) {
-      if (StreamDiff.Stream._profiles[options.source_id]) {
-        source = StreamDiff.Stream._profiles[options.source_id].name + '\'s';
+      if (Stream._profiles[options.source_id]) {
+        source = Stream._profiles[options.source_id].name + '\'s';
       } else {
         source = 'Facebook User\'s';
       }
@@ -609,8 +609,8 @@ StreamDiff.Stream = {
       // TODO i18n
       if (options.source_id == Mu.session().uid) {
         info += 'your ';
-      } else if (StreamDiff.Stream._profiles[options.source_id]) {
-        info += StreamDiff.Stream._profiles[options.source_id].name + '\'s ';
+      } else if (Stream._profiles[options.source_id]) {
+        info += Stream._profiles[options.source_id].name + '\'s ';
       }
     }
 
@@ -624,7 +624,7 @@ StreamDiff.Stream = {
     }
     info += 'most recent ';
 
-    if (!StreamDiff.Stream._prefs.show_read) {
+    if (!Stream._prefs.show_read) {
       info += 'unread ';
     }
     info += 'posts ';
@@ -648,24 +648,24 @@ StreamDiff.Stream = {
   },
 
   cacheKey: function(options) {
-    options = options || StreamDiff.Stream._options;
+    options = options || Stream._options;
     return 'stream' + JSON.stringify(options);
   },
 
   like: function(el) {
-    var post_id = StreamDiff.Stream.findPostId(el);
+    var post_id = Stream.findPostId(el);
 
     function response() {
       // clear the cache since we do an unintelligent UI update
-      Cache.remove(StreamDiff.Stream.cacheKey());
-      var post = StreamDiff.Stream._posts[post_id];
+      Cache.remove(Stream.cacheKey());
+      var post = Stream._posts[post_id];
       post.likes.user_likes = true;
       if (post.likes.count) {
         post.likes.count++;
       } else {
         post.likes.count = 1;
       }
-      StreamDiff.Stream.refreshPost(post_id);
+      Stream.refreshPost(post_id);
     }
 
     Mu.api({ method: 'Stream.addLike', post_id: post_id }, response);
@@ -678,9 +678,9 @@ StreamDiff.Stream = {
     }
 
     var
-      post      = StreamDiff.Stream.findPost(el),
+      post      = Stream.findPost(el),
       post_id   = post.getAttribute('data-post-id'),
-      data      = StreamDiff.Stream._posts[post_id],
+      data      = Stream._posts[post_id],
       swf       = data.attachment.media[0].video.source_url,
       mediaDiv  = StreamDiff.DOM.getElementsByClassName(post, 'media')[0],
       options   = {
@@ -709,9 +709,9 @@ StreamDiff.Stream = {
     }
 
     var
-      post      = StreamDiff.Stream.findPost(el),
+      post      = Stream.findPost(el),
       post_id   = post.getAttribute('data-post-id'),
-      data      = StreamDiff.Stream._posts[post_id],
+      data      = Stream._posts[post_id],
       swf       = data.attachment.media[0].video.source_url,
       mediaDiv  = StreamDiff.DOM.getElementsByClassName(post, 'media')[0],
       options   = {
@@ -734,8 +734,8 @@ StreamDiff.Stream = {
 
   markAsRead: function() {
     var
-      posts = StreamDiff.Stream._posts,
-      read  = StreamDiff.Stream._read,
+      posts = Stream._posts,
+      read  = Stream._read,
       post_id;
 
     // mark the current posts as read
@@ -746,22 +746,22 @@ StreamDiff.Stream = {
     }
 
     // refresh the view
-    StreamDiff.Stream._prefs.show_read = false;
-    StreamDiff.Stream.refresh();
+    Stream._prefs.show_read = false;
+    Stream.refresh();
   },
 
   showRead: function() {
-    StreamDiff.Stream._prefs.show_read = true;
-    StreamDiff.Stream.refresh();
+    Stream._prefs.show_read = true;
+    Stream.refresh();
   },
 
   hideRead: function() {
-    StreamDiff.Stream._prefs.show_read = false;
-    StreamDiff.Stream.refresh();
+    Stream._prefs.show_read = false;
+    Stream.refresh();
   },
 
   refresh: function() {
-    StreamDiff.Stream.view();
+    Stream.view();
     Spinner.show();
     window.scrollTo(0, 0);
   },
@@ -782,8 +782,8 @@ StreamDiff.Stream = {
   },
 
   showOlder: function() {
-    var options = StreamDiff.Stream._options;
-    StreamDiff.Stream.go(StreamDiff.copy({
+    var options = Stream._options;
+    Stream.go(StreamDiff.copy({
       offset: options.offset + options.limit
     }, options));
   },
@@ -799,16 +799,16 @@ StreamDiff.Stream = {
   },
 
   findPostId: function(el) {
-    var post = StreamDiff.Stream.findPost(el);
+    var post = Stream.findPost(el);
     if (post) {
       return post.getAttribute('data-post-id');
     }
   },
 
   refreshPost: function(id) {
-    var postHtml = StreamDiff.Stream.renderPost(
-      StreamDiff.Stream._posts[id],
-      StreamDiff.Stream._options
+    var postHtml = Stream.renderPost(
+      Stream._posts[id],
+      Stream._options
     );
 
     // renderPost returns a html fragment like "<li>...</li>"

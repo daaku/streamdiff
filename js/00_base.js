@@ -95,13 +95,13 @@ var StreamDiff = {
    */
   hashChange: function(hash) {
     if (hash == '/') {
-      StreamDiff.Stream.view({});
+      Stream.view({});
     } else if (hash.indexOf('/profile/') === 0) {
       var
         rest      = hash.substr(9).split('/', 2),
         source_id = rest[0],
         offset    = rest[1] || 0;
-      StreamDiff.Stream.view({
+      Stream.view({
         source_id: source_id,
         offset: parseInt(offset, 10)
       });
@@ -110,7 +110,7 @@ var StreamDiff = {
         rest       = hash.substr(8).split('/', 2),
         filter_key = rest[0],
         offset     = rest[1] || 0;
-      StreamDiff.Stream.view({
+      Stream.view({
         filter_key: filter_key,
         offset: parseInt(offset, 10)
       });
