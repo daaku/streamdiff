@@ -438,7 +438,7 @@ var Stream = {
    * Render the likes summary.
    */
   renderLikes: function(post, options) {
-    if (post.likes.count < 1) {
+    if (!post.likes.count) {
       return '';
     }
 
