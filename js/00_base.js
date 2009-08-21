@@ -26,12 +26,12 @@ StreamDiff = {
     Mu.init(
       '2522fa99e515c8a86ec5bbb879732d85', // api key
       xdUrl,                              // xd receiver
-      StreamDiff.Cookie.load()            // initial session (if any)
+      CookieAuth.load()                   // initial session (if any)
     );
 
     Delegator.listen('#doc .logout', 'click', function() {
       Mu.logout(function() {
-        StreamDiff.Cookie.clear();
+        CookieAuth.clear();
         StreamDiff.Intro.view();
       });
     });
@@ -198,13 +198,13 @@ StreamDiff = {
         //console.log(JSON.stringify(response));
         // missing permissions, session is still good
         if (response.error_code != 612) {
-          StreamDiff.Cookie.clear();
+          CookieAuth.clear();
         }
         StreamDiff.Intro.view();
         return;
       } else if (Mu.session()) {
         // good time to store a cookie
-        StreamDiff.Cookie.save();
+        CookieAuth.save();
       }
 
       // convert from array to named results for easier access

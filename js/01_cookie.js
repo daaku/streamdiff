@@ -1,25 +1,25 @@
 /**
 * Store session cookie.
 */
-StreamDiff.Cookie = {
+var CookieAuth = {
   NAME: 'fb',
 
   save: function() {
     if (Mu.session()) {
       document.cookie = (
-        StreamDiff.Cookie.NAME + '=' +
+        CookieAuth.NAME + '=' +
           Mu.encodeQS(Mu.session()) +
           '; expires=' + new Date(Mu.session().expires * 1000).toGMTString() +
           '; path=/'
       );
     } else {
-      StreamDiff.Cookie.clear();
+      CookieAuth.clear();
     }
   },
 
   load: function() {
     var
-    prefix  = StreamDiff.Cookie.NAME,
+    prefix  = CookieAuth.NAME,
     cookies = document.cookie.split(';'),
     cookie,
     session = null;
@@ -37,7 +37,7 @@ StreamDiff.Cookie = {
 
         // check if its expired
         if (new Date(session.expires * 1000) < new Date()) {
-          StreamDiff.Cookie.clear();
+          CookieAuth.clear();
           session = null;
         }
         break;
@@ -55,7 +55,7 @@ StreamDiff.Cookie = {
     //StreamDiff.Storage.clear();
     //StreamDiff.Stream._read = {};
     document.cookie = (
-      StreamDiff.Cookie.NAME + '=' +
+      CookieAuth.NAME + '=' +
         '; expires=' + new Date(0).toGMTString() +
         '; path=/'
     );
