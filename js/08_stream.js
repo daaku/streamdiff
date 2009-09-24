@@ -178,7 +178,7 @@ var Stream = {
         profile.pic_square =
           'http://static.ak.fbcdn.net/pics/q_silhouette.gif';
       }
-      profiles[profile.id] = profile;
+      profiles[profile.id + ''] = profile;
     }
 
     return profiles;
