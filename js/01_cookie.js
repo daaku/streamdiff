@@ -8,7 +8,7 @@ var CookieAuth = {
     if (Mu.session()) {
       document.cookie = (
         CookieAuth.NAME + '=' +
-          Mu.encodeQS(Mu.session()) +
+          Mu.QS.encode(Mu.session()) +
           '; expires=' + new Date(Mu.session().expires * 1000).toGMTString() +
           '; path=/'
       );
@@ -32,7 +32,7 @@ var CookieAuth = {
       }
 
       if (cookie.indexOf(prefix) === 0) {
-        session = Mu.decodeQS(cookie.substring(prefix.length, cookie.length));
+        session = Mu.QS.decode(cookie.substring(prefix.length, cookie.length));
         session.expires = parseInt(session.expires, 10);
 
         // check if its expired

@@ -19,13 +19,8 @@ var StreamDiff = {
    * Really, start your engines.
    */
   _init: function() {
-    // in dev, we use mu/xd.html, for prod we do far/xd.html
-    var xdUrl = window.location.hostname.indexOf('dev.') == 0
-      ? 'mu/xd.html'
-      : 'far/xd.html';
     Mu.init(
       '2522fa99e515c8a86ec5bbb879732d85', // api key
-      xdUrl,                              // xd receiver
       CookieAuth.load()                   // initial session (if any)
     );
 

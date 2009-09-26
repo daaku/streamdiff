@@ -3,8 +3,8 @@
 curl http://www.json.org/json2.js > json2.js
 cat \
   json2.js \
-  mu/md5sum.js \
   mu/mu.js \
+  mu/md5sum.js \
   delegator/delegator.js \
   herstory/herstory.js \
   far/FlashReplace-1.01.js \
