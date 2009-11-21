@@ -19,14 +19,13 @@ var StreamDiff = {
    * Really, start your engines.
    */
   _init: function() {
-    Mu.init(
-      '2522fa99e515c8a86ec5bbb879732d85', // api key
-      CookieAuth.load()                   // initial session (if any)
-    );
+    FB.init({
+      apiKey: '2522fa99e515c8a86ec5bbb879732d85',
+      cookie: true
+    });
 
     Delegator.listen('#doc .logout', 'click', function() {
-      Mu.logout(function() {
-        CookieAuth.clear();
+      FB.logout(function() {
         Intro.view();
       });
     });
@@ -35,10 +34,10 @@ var StreamDiff = {
 
     // finally, use the cookied status or try to get a fresh status from
     // login_status to initialize the application
-    if (Mu.session()) {
+    if (FB.getSession()) {
       StreamDiff.statusReady();
     } else {
-      Mu.status(function(session) {
+      FB.getLoginStatus(function(session) {
         StreamDiff.statusReady();
       });
     }
@@ -70,7 +69,7 @@ var StreamDiff = {
       },
       action_links: [ { text: 'StreamDiff', href: 'http://streamdiff.com/' } ]
     };
-    Mu.publish(post);
+    FB.publish(post);
   },
 
   /**
@@ -191,15 +190,8 @@ var StreamDiff = {
       if (response.error_code) {
         //alert(JSON.stringify(response));
         //console.log(JSON.stringify(response));
-        // missing permissions, session is still good
-        if (response.error_code != 612) {
-          CookieAuth.clear();
-        }
         Intro.view();
         return;
-      } else if (Mu.session()) {
-        // good time to store a cookie
-        CookieAuth.save();
       }
 
       // convert from array to named results for easier access
@@ -216,9 +208,9 @@ var StreamDiff = {
     }
 
     if (isMulti) {
-      Mu.api({ method: 'Fql.multiquery', queries: JSON.stringify(q) }, c);
+      FB.api({ method: 'Fql.multiquery', queries: JSON.stringify(q) }, c);
     } else {
-      Mu.api({ method: 'Fql.query', query: q }, c);
+      FB.api({ method: 'Fql.query', query: q }, c);
     }
   },
 

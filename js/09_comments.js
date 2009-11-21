@@ -40,14 +40,14 @@ var Comments = {
         post.comments.comment_list = [];
       }
       post.comments.comment_list.push({
-        fromid: Mu.session().uid,
+        fromid: FB.getSession().uid,
         time: (new Date().getTime() / 1000),
         text: text
       });
       Stream.refreshPost(post_id);
     }
 
-    Mu.api({
+    FB.api({
       method  : 'Stream.addComment',
       post_id : post_id,
       comment : text

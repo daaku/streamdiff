@@ -50,7 +50,7 @@ Detail = {
         'id IN (SELECT fromid FROM #comments) OR ' +
         'id IN (SELECT likes.friends FROM #details) OR ' +
         'id IN (SELECT likes.sample FROM #details) OR ' +
-        'id=' + Mu.session().uid
+        'id=' + FB.getSession().uid
     );
 
     StreamDiff.fql({

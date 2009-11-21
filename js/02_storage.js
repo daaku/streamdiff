@@ -3,7 +3,7 @@
 */
 var Cache = {
   put: function(key, value, expires) {
-    key   = Mu.session().uid + key;
+    key   = FB.getSession().uid + key;
     value = JSON.stringify({
       value   : value,
       expires : expires ? new Date().getTime() + (expires * 1000) : null
@@ -17,7 +17,7 @@ var Cache = {
   },
 
   get: function(key) {
-    key = Mu.session().uid + key;
+    key = FB.getSession().uid + key;
     var value;
     if (window.localStorage) {
       value = window.localStorage[key];
@@ -44,7 +44,7 @@ var Cache = {
   },
 
   remove: function(key) {
-    key = Mu.session().uid + key;
+    key = FB.getSession().uid + key;
     if (window.localStorage) {
       window.localStorage[key] = '';
     } else if (window.globalStorage) {

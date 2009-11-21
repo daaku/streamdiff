@@ -71,7 +71,7 @@ var Publisher = {
 
       var post = Stream._posts[post_id] = {
         post_id      : post_id,
-        actor_id     : Mu.session().uid,
+        actor_id     : FB.getSession().uid,
         target_id    : target_id,
         message      : message,
         created_time : (new Date().getTime() / 1000),
@@ -106,7 +106,7 @@ var Publisher = {
       document.getElementById('message').value = '';
     }
 
-    Mu.api({
+    FB.api({
       method    : 'Stream.publish',
       target_id : target_id,
       message   : message

@@ -1,14 +1,12 @@
 #!/bin/sh
 
-curl http://www.json.org/json2.js > json2.js
+curl http://static.ak.fbcdn.net/connect/en_US/core.debug.js > core.debug.js
 cat \
-  json2.js \
-  mu/mu.js \
-  mu/md5sum.js \
+  core.debug.js \
   delegator/delegator.js \
   herstory/herstory.js \
   far/FlashReplace-1.01.js \
   js/*.js \
   | java -jar ~/usr/yuicompressor/lib/*.jar --type js > far/min.js
 cat streamdiff.css | java -jar ~/usr/yuicompressor/lib/*.jar --type css > far/min.css
-rm json2.js
+rm core.debug.js

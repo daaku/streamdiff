@@ -3,7 +3,7 @@
  */
 var Intro = {
   view: function() {
-    if (Mu.session()) {
+    if (FB.getSession()) {
       StreamDiff.fql({
         user: (
           'SELECT ' +
@@ -13,7 +13,7 @@ var Intro = {
           'FROM ' +
             'user ' +
           'WHERE ' +
-            'uid=' + Mu.session().uid
+            'uid=' + FB.getSession().uid
         ),
         perms: (
           'SELECT ' +
@@ -22,7 +22,7 @@ var Intro = {
           'FROM ' +
             'permissions ' +
           'WHERE ' +
-            'uid=' + Mu.session().uid
+            'uid=' + FB.getSession().uid
         )
       }, Intro.render);
     } else {
@@ -71,7 +71,7 @@ var Intro = {
    * Handles the connect action.
    */
   connect: function() {
-    Mu.login(function(session) {
+    FB.login(function(session) {
       Stream.view();
     }, 'read_stream,publish_stream');
   }

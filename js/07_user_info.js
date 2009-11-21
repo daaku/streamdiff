@@ -2,7 +2,7 @@ var UserInfo = {
   render: function(user) {
     var html;
 
-    if (!Mu.session()) {
+    if (!FB.getSession()) {
       html = '';
     } else if (user) {
       html = (

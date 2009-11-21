@@ -94,7 +94,7 @@ var Stream = {
     StreamDiff.copy(options, Stream.defaultOptions);
     Stream._options = options;
 
-    if (!Mu.session()) {
+    if (!FB.getSession()) {
       Intro.view();
       return;
     }
@@ -156,7 +156,7 @@ var Stream = {
         'id IN (SELECT comments.comment_list.fromid FROM #stream) OR ' +
         'id IN (SELECT likes.friends FROM #stream) OR ' +
         'id IN (SELECT likes.sample FROM #stream) OR ' +
-        'id=' + Mu.session().uid
+        'id=' + FB.getSession().uid
     );
 
     var queries = {
@@ -200,7 +200,7 @@ var Stream = {
       l;
 
     // refresh the user info box
-    UserInfo.render(profiles[Mu.session().uid]);
+    UserInfo.render(profiles[FB.getSession().uid]);
 
     // render all the posts
     var streamItems = [];
@@ -453,7 +453,7 @@ var Stream = {
      // check for self
      if (likes.user_likes) {
        likers.push(
-         '<a href="#/profile/' + Mu.session().uid + '">You</a>'
+         '<a href="#/profile/' + FB.getSession().uid + '">You</a>'
        );
        count--;
      }
@@ -569,7 +569,7 @@ var Stream = {
        html += (
          '<form onsubmit="return Comments.submit(this)" ' +
            'class="sub post-comment"' + style + '>' +
-           '<img src="' + profiles[Mu.session().uid].pic_square + '">' +
+           '<img src="' + profiles[FB.getSession().uid].pic_square + '">' +
            '<textarea name="text">Write a comment…</textarea>' +
            '<div class="buttons">' +
              '<input type="submit" class="button" value="Comment">' +
@@ -607,7 +607,7 @@ var Stream = {
     var info = 'Viewing ';
     if (options.source_id) {
       // TODO i18n
-      if (options.source_id == Mu.session().uid) {
+      if (options.source_id == FB.getSession().uid) {
         info += 'your ';
       } else if (Stream._profiles[options.source_id]) {
         info += Stream._profiles[options.source_id].name + '\'s ';
@@ -668,7 +668,7 @@ var Stream = {
       Stream.refreshPost(post_id);
     }
 
-    Mu.api({ method: 'Stream.addLike', post_id: post_id }, response);
+    FB.api({ method: 'Stream.addLike', post_id: post_id }, response);
   },
 
   playVideo: function(el, event) {
