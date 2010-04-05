@@ -9,24 +9,28 @@ var Publisher = {
     Publisher._initListeners = true;
 
     Delegator.listen('.publisher #message', 'focus', function() {
-                       Publisher.focus(this);
-                     });
+      Publisher.focus(this);
+    });
     Delegator.listen('.publisher #message', 'blur', function() {
-                       Publisher.blur(this);
-                     });
+      Publisher.blur(this);
+    });
     Delegator.listen('.publisher #message', 'keyup', function() {
-                       Publisher.autoSize(this);
-                     });
+      Publisher.autoSize(this);
+    });
     Delegator.listen('.publisher #message', 'mouseup', function() {
-                       Publisher.autoSize(this);
-                     });
+      Publisher.autoSize(this);
+    });
+    Delegator.listen('.publisher', 'submit', function(ev) {
+      ev.preventDefault();
+      Publisher.submit();
+    });
   },
 
   render: function(message) {
     Publisher.init();
     Publisher._message = message;
     return (
-      '<form class="publisher" onsubmit="return Publisher.submit()">' +
+      '<form class="publisher">' +
         '<textarea id="message">' + message + '</textarea>' +
         '<div class="buttons">' +
           '<input type="submit" class="button" value="share">' +

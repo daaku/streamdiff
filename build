@@ -1,12 +1,12 @@
 #!/bin/sh
 
-curl http://static.ak.fbcdn.net/connect/en_US/core.debug.js > core.debug.js
+curl "http://connect.facebook.net/en_US/api/auth/init/ui.methods.js" > connect.js
 cat \
-  core.debug.js \
+  connect.js \
   delegator/delegator.js \
   herstory/herstory.js \
   far/FlashReplace-1.01.js \
   js/*.js \
   | java -jar ~/usr/yuicompressor/lib/*.jar --type js > far/min.js
 cat streamdiff.css | java -jar ~/usr/yuicompressor/lib/*.jar --type css > far/min.css
-rm core.debug.js
+rm connect.js

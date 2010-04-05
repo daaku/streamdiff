@@ -48,6 +48,7 @@ var StreamDiff = {
    */
   shareSite: function() {
     var post = {
+      method: 'stream.publish',
       message: 'Checkout StreamDiff!',
       attachment: {
         name: 'StreamDiff',
@@ -69,7 +70,7 @@ var StreamDiff = {
       },
       action_links: [ { text: 'StreamDiff', href: 'http://streamdiff.com/' } ]
     };
-    FB.publish(post);
+    FB.ui(post);
   },
 
   /**

@@ -48,6 +48,10 @@ var Stream = {
     Delegator.listen('#stream .post .action-comment', 'click', function() {
       Comments.show(this);
     });
+    Delegator.listen('#stream .post-comment', 'submit', function(ev) {
+      ev.preventDefault();
+      Comments.submit(this);
+    });
     Delegator.listen('#stream .post .action-like', 'click', function() {
       Stream.like(this);
     });
@@ -567,8 +571,7 @@ var Stream = {
        var style = html === '' ? ' style="display: none;"' : '';
 
        html += (
-         '<form onsubmit="return Comments.submit(this)" ' +
-           'class="sub post-comment"' + style + '>' +
+         '<form class="sub post-comment"' + style + '>' +
            '<img src="' + profiles[FB.getSession().uid].pic_square + '">' +
            '<textarea name="text">Write a comment…</textarea>' +
            '<div class="buttons">' +
@@ -672,10 +675,7 @@ var Stream = {
   },
 
   playVideo: function(el, event) {
-    event.returnValue = false;
-    if (event.preventDefault) {
-      event.preventDefault();
-    }
+    event.preventDefault();
 
     var
       post      = Stream.findPost(el),
@@ -703,10 +703,7 @@ var Stream = {
 
   playMusic: function(el, event) {
     //fixme
-    event.returnValue = false;
-    if (event.preventDefault) {
-      event.preventDefault();
-    }
+    event.preventDefault();
 
     var
       post      = Stream.findPost(el),
