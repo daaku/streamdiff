@@ -7,6 +7,6 @@ cat \
   herstory/herstory.js \
   far/FlashReplace-1.01.js \
   js/*.js \
-  | java -jar ~/usr/yuicompressor/lib/*.jar --type js > far/min.js
-cat streamdiff.css | java -jar ~/usr/yuicompressor/lib/*.jar --type css > far/min.css
+  | closure > far/min.js
+cat streamdiff.css | yuicompressor --type css > far/min.css
 rm connect.js
