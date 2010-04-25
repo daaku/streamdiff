@@ -11,14 +11,6 @@ var StreamDiff = {
       );
     }
 
-    // setTimeout works around a FF iframe cache issue
-    window.setTimeout(function() { StreamDiff._init(); }, 0);
-  },
-
-  /**
-   * Really, start your engines.
-   */
-  _init: function() {
     FB.init({
       apiKey: '2522fa99e515c8a86ec5bbb879732d85',
       cookie: true

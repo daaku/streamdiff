@@ -8,7 +8,7 @@ var Stream = {
     filter_key: 'nf',
     source_id: null,
     offset: 0,
-    limit: 30
+    limit: 8
   },
 
   // persistent (client side) preferences
@@ -774,8 +774,8 @@ var Stream = {
     if (options.offset > 0) {
       fragment += '/' + options.offset;
     }
-    Herstory.load(fragment);
     window.scrollTo(0, 0);
+    Herstory.load(fragment);
   },
 
   showOlder: function() {
